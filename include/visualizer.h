@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 14:10:35 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/17 22:18:20 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/20 02:00:59 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,8 @@ SDL_Window		*g_main_window;
 SDL_Renderer	*g_main_render;
 TTF_Font		*g_font;
 
-void			choose_color_pt3(t_battlefield *cell, int i);
-void			choose_color_pt2(t_battlefield *cell, int i);
 void			choose_color(t_battlefield *cell, int i);
 char			choose_color_char(int i);
-int				choose_reverse_color_pt3(t_battlefield *cell);
-int				choose_reverse_color_pt2(t_battlefield *cell);
 int				choose_reverse_color(t_battlefield *cell);
 int				init(t_vm *vm);
 
