@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/17 22:22:13 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/20 00:29:59 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,10 @@ void			init_arena(t_vm *vm)
 	unsigned	i;
 	int			step;
 	int			byte;
-	int			temp;
 	int			diff;
 
 	byte = 0;
 	diff = MEM_SIZE / vm->num_players;
-	temp = MEM_SIZE / vm->num_players;
 	step = MEM_SIZE / vm->num_players;
 	i = 0;
 	while (i < vm->num_players)
@@ -58,7 +56,7 @@ void			init_arena(t_vm *vm)
 			init_arena_module(vm, byte);
 			byte++;
 		}
-		diff += temp;
+		diff += step;
 		free(vm->players[i].code);
 		++i;
 	}

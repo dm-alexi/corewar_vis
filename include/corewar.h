@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/17 22:20:00 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/19 18:33:44 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ typedef struct		s_battlefield
 {
 	t_byte				code;
 	char				color;
-	int					color_r;
-	int					color_g;
-	int					color_b;
+	int					color_rgb;
 	int					write_cycles;
 	t_byte				cursor;
 }					t_battlefield;
