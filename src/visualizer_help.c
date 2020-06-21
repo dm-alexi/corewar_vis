@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:06:04 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/21 16:10:39 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/22 00:18:07 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	set_sdl_color(SDL_Color *color, int i)
 	color->b = colors[i] >> 16 & 0xff;
 }
 
-void	live_players(t_vm *vm, SDL_FRect coor, int sum)
+void	live_players(t_vm *vm, SDL_Rect coor, int sum)
 {
 	unsigned	i;
 	float		k;
@@ -73,7 +73,7 @@ void	live_players(t_vm *vm, SDL_FRect coor, int sum)
 	{
 		coor.w = vm->players[i].lives_in_current_period * k;
 		set_render_draw_color(choose_color(i));
-		SDL_RenderFillRectF(g_main_render, &coor);
+		SDL_RenderFillRect(g_main_render, &coor);
 		coor.x += coor.w;
 		++i;
 	}

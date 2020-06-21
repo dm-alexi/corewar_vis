@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:35 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/17 20:58:10 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 20:29:00 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void		get_players(t_vm *vm, char **files)
 	{
 		get_player(vm->players + i, files[i]);
 		vm->players[i].num = i + 1;
-		vm->players[i].amount_cursors = 0;
+		vm->players[i].num_cursors = 0;
 		vm->players[i].last_alive = 0;
 		vm->players[i].lives_in_current_period = 0;
 		++i;

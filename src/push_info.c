@@ -6,18 +6,18 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:05:44 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/21 01:33:39 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/22 01:42:59 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visualizer.h"
 
-void			push_distribution(t_battlefield *arena, float y)
+void	push_distribution(t_battlefield *arena, int y)
 {
 	int			colors[9];
 	int			i;
 	float		k;
-	SDL_FRect	coor;
+	SDL_Rect	coor;
 
 	k = 300 / (float)MEM_SIZE;
 	i = -1;
@@ -34,15 +34,15 @@ void			push_distribution(t_battlefield *arena, float y)
 		coor.h = 15;
 		coor.w = colors[i] * k;
 		set_render_draw_color(choose_color(i));
-		SDL_RenderFillRectF(g_main_render, &coor);
+		SDL_RenderFillRect(g_main_render, &coor);
 		coor.x += coor.w;
 	}
 }
 
-void			push_live_breakdown(t_vm *vm, int y)
+void	push_live_breakdown(t_vm *vm, int y)
 {
 	int			sum;
-	SDL_FRect	coor;
+	SDL_Rect	coor;
 
 	coor.y = y;
 	coor.x = SCREEN_WIDTH - INFORMATION_SIZE + 25;
@@ -53,26 +53,25 @@ void			push_live_breakdown(t_vm *vm, int y)
 	else
 	{
 		SDL_SetRenderDrawColor(g_main_render, 255, 255, 255, 255);
-		coor.w = INFORMATION_SIZE - 50;
-		SDL_RenderDrawRectF(g_main_render, &coor);
+		coor.w = INFORMATION_SIZE - OFFSET;
+		SDL_RenderDrawRect(g_main_render, &coor);
 	}
 }
 
-void			put_text_texture(float y, char *temp_2,
-					char *temp_3, SDL_Texture *text_texture)
+void	put_text_texture(int y, char *temp_2, char *temp_3,
+			SDL_Texture *text_texture)
 {
 	SDL_Rect	coor;
 
 	(temp_2) ? (TTF_SizeText(g_font, temp_2, &coor.w, &coor.h)) :
 		TTF_SizeText(g_font, temp_3, &coor.w, &coor.h);
-	coor.x = SCREEN_WIDTH - INFORMATION_SIZE + 50;
+	coor.x = SCREEN_WIDTH - INFORMATION_SIZE + OFFSET;
 	coor.y = y;
 	SDL_RenderCopy(g_main_render, text_texture, NULL, &coor);
 	SDL_DestroyTexture(text_texture);
 }
 
-void			push_int_text(int data, char *info_text,
-					float y, SDL_Color color)
+void	push_int_text(int data, char *info_text, int y, SDL_Color color)
 {
 	char		*temp_1;
 	char		*temp_2;
@@ -96,7 +95,7 @@ void			push_int_text(int data, char *info_text,
 	ft_strdel(&temp_2);
 }
 
-void			key_pause_quite(t_vm *vm)
+void	key_pause_quite(t_vm *vm)
 {
 	SDL_Event	event;
 

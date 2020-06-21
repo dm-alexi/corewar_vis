@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 18:22:13 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 21:49:28 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	kill_process(t_vm *vm, t_process *p)
 	if (vm->verbosity & DEATHS)
 		ft_printf("Process %u hasn't lived for %d cycles (CTD %d)\n", p->num,
 		vm->cycle - p->last_live, vm->cycles_to_die);
-	vm->players[p->player_num].amount_cursors--;
+	vm->players[p->player_num].num_cursors--;
 	vm->num_process--;
-	vm->arena[p->pc].cursor = 0;
+	vm->arena[p->pc].cursors--;
 	free(p);
 }
 
@@ -106,13 +106,11 @@ int			battle(t_vm *vm)
 			run_cycle(vm);
 			if (vm->cycle >= vm->next_check && (finished = check(vm)))
 				break ;
-			if (vm->visual)
-				run_pause_module(vm, 1);
 			if (vm->dump_len && vm->dump_cycle == vm->cycle)
 				return (dump(vm));
 		}
-		else
-			run_pause_module(vm, 0);
+		if (vm->visual)
+			run_module(vm);
 	}
 	if (vm->visual)
 		battle_module(vm);

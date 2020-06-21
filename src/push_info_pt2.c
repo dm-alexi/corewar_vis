@@ -6,14 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 15:49:05 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/17 22:19:31 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/22 01:42:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visualizer.h"
 
-void			push_int_slash_data(float y, int data_1,
-					int data_2, char *text)
+void		push_int_slash_data(int y, int data_1, int data_2, char *text)
 {
 	char		*temp_1;
 	char		*temp_2;
@@ -40,7 +39,7 @@ void			push_int_slash_data(float y, int data_1,
 	ft_strdel(&temp_3);
 }
 
-void			push_char_text(char *text, float y, SDL_Color color)
+void		push_char_text(char *text, int y, SDL_Color color)
 {
 	SDL_Surface	*text_surface;
 	SDL_Texture	*text_texture;
@@ -49,7 +48,7 @@ void			push_char_text(char *text, float y, SDL_Color color)
 	text_surface = NULL;
 	text_texture = NULL;
 	TTF_SizeText(g_font, text, &coor.w, &coor.h);
-	coor.x = SCREEN_WIDTH - INFORMATION_SIZE + 50;
+	coor.x = SCREEN_WIDTH - INFORMATION_SIZE + OFFSET;
 	coor.y = y;
 	text_surface = TTF_RenderText_Solid(g_font, text, color);
 	if (text_surface)
@@ -65,7 +64,7 @@ void			push_char_text(char *text, float y, SDL_Color color)
 	}
 }
 
-void			push_players(t_vm *vm, int start_y)
+void		push_players(t_vm *vm, int start_y)
 {
 	unsigned	i;
 	int			pos;
@@ -82,14 +81,14 @@ void			push_players(t_vm *vm, int start_y)
 			"Last alive: ", pos + 40, WHITE);
 		push_int_text(vm->players[i].lives_in_current_period,
 			"Lives in current period : ", pos + 60, WHITE);
-		push_int_text(vm->players[i].amount_cursors,
-			"Amount of coaches: ", pos + 80, WHITE);
+		push_int_text(vm->players[i].num_cursors,
+			"Number of coaches: ", pos + 80, WHITE);
 		pos += 110;
 	}
 }
 
-SDL_Color		winner_info(t_vm *vm, SDL_Texture *text_texture,
-					SDL_Surface *text_surface, SDL_Rect pos)
+SDL_Color	winner_info(t_vm *vm, SDL_Texture *text_texture,
+				SDL_Surface *text_surface, SDL_Rect pos)
 {
 	SDL_Color	winner;
 
@@ -104,7 +103,7 @@ SDL_Color		winner_info(t_vm *vm, SDL_Texture *text_texture,
 	return (winner);
 }
 
-void			push_winner_vis(t_vm *vm)
+void		push_winner_vis(t_vm *vm)
 {
 	SDL_Color	winner;
 	SDL_Rect	pos;
@@ -114,8 +113,8 @@ void			push_winner_vis(t_vm *vm)
 	vm->vis_pause = 0;
 	vm->vis_quit = 0;
 	push_to_render_battlefield(vm);
-	push_info(vm, "**Pause**");
-	pos.x = SCREEN_WIDTH - INFORMATION_SIZE + 50;
+	push_info(vm);
+	pos.x = SCREEN_WIDTH - INFORMATION_SIZE + OFFSET;
 	pos.y = SCREEN_HEIGHT - 120;
 	text_surface = NULL;
 	text_texture = NULL;
