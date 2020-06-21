@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:06:04 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/17 22:32:35 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 01:50:30 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,26 +62,10 @@ int			init(t_vm *vm)
 	return (1);
 }
 
-void		set_render_draw_color(char color)
+void		set_render_draw_color(int color)
 {
-	if (color == 'r')
-		SDL_SetRenderDrawColor(g_main_render, 155, 0, 0, 255);
-	else if (color == 'y')
-		SDL_SetRenderDrawColor(g_main_render, 155, 155, 0, 255);
-	else if (color == 'g')
-		SDL_SetRenderDrawColor(g_main_render, 0, 155, 0, 255);
-	else if (color == 'b')
-		SDL_SetRenderDrawColor(g_main_render, 0, 0, 155, 255);
-	else if (color == 'p')
-		SDL_SetRenderDrawColor(g_main_render, 155, 0, 155, 255);
-	else if (color == 'c')
-		SDL_SetRenderDrawColor(g_main_render, 0, 155, 155, 255);
-	else if (color == 'e')
-		SDL_SetRenderDrawColor(g_main_render, 155, 155, 155, 255);
-	else if (color == 'l')
-		SDL_SetRenderDrawColor(g_main_render, 50, 50, 50, 255);
-	else
-		SDL_SetRenderDrawColor(g_main_render, 111, 111, 111, 255);
+	SDL_SetRenderDrawColor(g_main_render, color & 0xff, color >> 8 & 0xff,
+		color >> 16 & 0xff, 255);
 }
 
 void		visualizer_event(t_vm *vm)

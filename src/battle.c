@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/17 22:31:52 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 00:59:59 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ static int	check(t_vm *vm)
 		if (vm->verbosity & CYCLES)
 			ft_printf("Cycle to die is now %d\n", vm->cycles_to_die);
 	}
-	i = -1;
-	while (++i < vm->num_players)
-		vm->players[i].lives_in_current_period = 0;
+	i = 0;
+	while (i < vm->num_players)
+		vm->players[i++].lives_in_current_period = 0;
 	vm->live_calls = 0;
 	vm->next_check = vm->cycle + vm->cycles_to_die;
 	return (vm->start == NULL);

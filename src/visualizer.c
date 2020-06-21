@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:06:18 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/20 01:47:03 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 01:45:57 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ int				arena_play(t_vm *vm, SDL_FRect cell, unsigned i,
 			cell.x = cell.w * j;
 			cell.y = cell.h * i;
 			SDL_SetRenderDrawColor(g_main_render,
-				(vm->arena[i + j + lines_count].color_rgb & 0xff) +
+				(vm->arena[i + j + lines_count].color & 0xff) +
 					vm->arena[i + j + lines_count].write_cycles,
-				(vm->arena[i + j + lines_count].color_rgb >> 8 & 0xff) +
+				(vm->arena[i + j + lines_count].color >> 8 & 0xff) +
 					vm->arena[i + j + lines_count].write_cycles,
-				(vm->arena[i + j + lines_count].color_rgb >> 16 & 0xff) +
+				(vm->arena[i + j + lines_count].color >> 16 & 0xff) +
 					vm->arena[i + j + lines_count].write_cycles, 255);
 			if (!vm->vis_pause && vm->arena[i + j +
 				lines_count].write_cycles > 0)

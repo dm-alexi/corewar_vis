@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:05:44 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/17 22:19:31 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 01:33:39 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void			push_distribution(t_battlefield *arena, float y)
 	{
 		coor.h = 15;
 		coor.w = colors[i] * k;
-		set_render_draw_color(choose_color_char(i));
+		set_render_draw_color(choose_color(i));
 		SDL_RenderFillRectF(g_main_render, &coor);
 		coor.x += coor.w;
 	}

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/19 18:33:44 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 11:53:57 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,13 @@ typedef struct		s_process
 	struct s_process	*next;
 	unsigned			player_num;
 	unsigned			exec_cycle;
-	char				color;
+	int					color;
 }					t_process;
 
 typedef struct		s_battlefield
 {
 	t_byte				code;
-	char				color;
-	int					color_rgb;
+	int					color;
 	int					write_cycles;
 	t_byte				cursor;
 }					t_battlefield;
@@ -116,17 +115,14 @@ int					dump(t_vm *vm);
 
 int					cut(int n);
 void				init_arena(t_vm *vm);
-void				init_arena_module(t_vm *vm, int byte);
-
-int					arena_players_module(t_vm *vm,
-						unsigned i, int step, int byte);
 t_process			*new_process_vm(t_process *next, unsigned num,
 						unsigned player_num, int pc);
 int					read_dir(int start, t_battlefield *arena);
 int					read_ind(int start, t_battlefield *arena);
 void				write_bytes(int n, int start,
-						t_battlefield *arena, char color);
+						t_battlefield *arena, int color);
 int					battle(t_vm *vm);
+
 void				battle_module(t_vm *vm);
 void				run_pause_module(t_vm *vm, int flag);
 void				read_instr(t_process *cur, t_vm *vm);
