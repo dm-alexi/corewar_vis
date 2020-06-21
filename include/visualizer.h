@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 14:10:35 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/21 01:50:10 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 12:58:23 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ TTF_Font		*g_font;
 
 int				choose_color(int n);
 int				choose_reverse_color(t_battlefield *cell);
-int				init(t_vm *vm);
+void			init_visualizer(t_vm *vm);
 
 void			push_to_render_battlefield(t_vm *vm);
 void			push_info(t_vm *vm, char *status);

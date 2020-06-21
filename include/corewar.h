@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 11:53:57 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 16:12:19 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ typedef struct		s_op
 
 extern const t_op	g_tab[];
 
-void				sys_error(char *s);
-void				error(char *s);
-void				error2(char *s, char *t);
+void				sys_error(const char *s);
+void				error(const char *s);
+void				error2(const char *s, const char *t);
 void				usage(void);
 void				check_invariants(void);
 
@@ -119,8 +119,8 @@ t_process			*new_process_vm(t_process *next, unsigned num,
 						unsigned player_num, int pc);
 int					read_dir(int start, t_battlefield *arena);
 int					read_ind(int start, t_battlefield *arena);
-void				write_bytes(int n, int start,
-						t_battlefield *arena, int color);
+void				write_bytes(int n, int start, t_battlefield *arena,
+						int color);
 int					battle(t_vm *vm);
 
 void				battle_module(t_vm *vm);

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/17 19:59:53 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 12:18:26 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ int	main(int ac, char **av)
 		vm.verbosity = 0;
 	}
 	init_arena(&vm);
-	if (!vm.visual)
-		introduce(&vm);
-	if (battle(&vm) && !vm.visual)
+	introduce(&vm);
+	if (battle(&vm))
 		declare_winner(&vm);
 	delete_vm(&vm);
 	return (0);

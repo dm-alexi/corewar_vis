@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:18 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/15 02:08:59 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 16:12:06 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <unistd.h>
 #include "corewar.h"
 
-void	sys_error(char *s)
+void	sys_error(const char *s)
 {
 	if (!s)
 		write(STDERR_FILENO, "Error: ", 7);
@@ -26,7 +26,7 @@ void	sys_error(char *s)
 	exit(EXIT_FAILURE);
 }
 
-void	error(char *s)
+void	error(const char *s)
 {
 	write(STDERR_FILENO, "Error: ", 7);
 	write(STDERR_FILENO, s, ft_strlen(s));
@@ -34,7 +34,7 @@ void	error(char *s)
 	exit(EXIT_FAILURE);
 }
 
-void	error2(char *s, char *t)
+void	error2(const char *s, const char *t)
 {
 	write(STDERR_FILENO, "Error: ", 7);
 	write(STDERR_FILENO, s, ft_strlen(s));

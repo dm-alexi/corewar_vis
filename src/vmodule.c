@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 17:49:33 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/21 11:53:33 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 16:03:22 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,9 @@ void	battle_module(t_vm *vm)
 
 void	run_pause_module(t_vm *vm, int flag)
 {
-	if (flag == 1)
-	{
-		push_to_render_battlefield(vm);
-		push_info(vm, "***Running***");
-		SDL_RenderPresent(g_main_render);
-	}
-	else
-	{
-		push_to_render_battlefield(vm);
-		push_info(vm, "***Pause***");
-		SDL_RenderPresent(g_main_render);
-	}
+	push_to_render_battlefield(vm);
+	push_info(vm, flag ? "***Running***" : "***Pause***");
+	SDL_RenderPresent(g_main_render);
 }
 
 void	exec_instr_module(t_process *cur, t_vm *vm)
