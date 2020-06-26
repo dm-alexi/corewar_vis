@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op1.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asmall <asmall@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:43 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/05/11 18:43:23 by asmall           ###   ########.fr       */
+/*   Updated: 2020/06/26 19:15:20 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	live(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	if (-args[0] > 0 && (unsigned)(-args[0]) <= vm->num_players)
 	{
 		vm->last_alive = vm->players[-args[0] - 1].num;
-		vm->players[t->player_num].last_alive = vm->cycle;
-		vm->players[t->player_num].lives_in_current_period++;
+		vm->players[-args[0] - 1].last_alive = vm->cycle;
+		vm->players[-args[0] - 1].lives_in_current_period++;
 		if (vm->verbosity & LIVES)
 			ft_printf(COPYCAT ? "Player %u (%s) is said to be alive\n" :
 			"A process shows that player %u (%s) is alive\n",

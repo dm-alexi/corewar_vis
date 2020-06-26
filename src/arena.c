@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/22 01:04:24 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/26 13:30:34 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_process	*new_process(t_process *next, unsigned num,
 		sys_error(NULL);
 	p->next = next;
 	p->player_num = player_num;
-	p->color = choose_color(player_num);
+	p->color = g_colors[player_num];
 	p->num = num;
 	p->pc = pc;
 	return (p);
@@ -59,7 +59,7 @@ void				init_arena(t_vm *vm)
 		while (j < vm->players[i].header.prog_size)
 		{
 			vm->arena[i * step + j].code = vm->players[i].code[j];
-			vm->arena[i * step + j].color = choose_color(i);
+			vm->arena[i * step + j].color = g_colors[i];
 			++j;
 		}
 		free(vm->players[i++].code);

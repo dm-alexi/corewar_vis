@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 21:49:28 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/26 20:08:09 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static int	check(t_vm *vm)
 		vm->players[i++].lives_in_current_period = 0;
 	vm->live_calls = 0;
 	vm->next_check = vm->cycle + vm->cycles_to_die;
+	if (!vm->start)
+		vm->winner = vm->last_alive;
 	return (vm->start == NULL);
 }
 
@@ -90,29 +92,25 @@ static void	run_cycle(t_vm *vm)
 	}
 }
 
-int			battle(t_vm *vm)
+void		battle(t_vm *vm)
 {
-	int	finished;
-
-	finished = 0;
 	if (vm->visual)
 		init_visualizer(vm);
 	while (!vm->vis_quit)
 	{
 		if (vm->visual)
-			visualizer_event(vm);
+			event_handler(vm);
 		if (!vm->vis_pause)
 		{
 			run_cycle(vm);
-			if (vm->cycle >= vm->next_check && (finished = check(vm)))
+			if (vm->cycle >= vm->next_check && check(vm))
 				break ;
-			if (vm->dump_len && vm->dump_cycle == vm->cycle)
-				return (dump(vm));
+			if (vm->dump_len && vm->dump_cycle == vm->cycle && dump(vm))
+				break ;
 		}
 		if (vm->visual)
-			run_module(vm);
+			visualize(vm);
 	}
 	if (vm->visual)
-		battle_module(vm);
-	return (finished);
+		finish_visualization(vm);
 }

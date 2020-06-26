@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/22 01:04:49 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/26 20:04:33 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct		s_vm
 	unsigned		dump_cycle;
 	unsigned		dump_len;
 	unsigned		verbosity;
+	int				winner;
 	t_byte			visual;
 	t_byte			vis_quit;
 	t_byte			vis_pause;
@@ -119,9 +120,8 @@ int					read_dir(int start, t_battlefield *arena);
 int					read_ind(int start, t_battlefield *arena);
 void				write_bytes(int n, int start, t_battlefield *arena,
 						int color);
-int					battle(t_vm *vm);
+void				battle(t_vm *vm);
 
-void				battle_module(t_vm *vm);
 void				run_module(t_vm *vm);
 void				read_instr(t_process *cur, t_vm *vm);
 void				exec_instr(t_process *cur, t_vm *vm);
