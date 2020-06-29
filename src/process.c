@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 23:39:58 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 13:11:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static int	get_argtypes(t_process *t, t_vm *vm, t_byte *argtypes)
 
 static void	get_args(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 {
-	int		i;
-	int		p;
+	int	i;
+	int	p;
 
 	p = cut(t->pc + 2);
 	i = -1;

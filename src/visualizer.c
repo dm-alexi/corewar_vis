@@ -6,74 +6,61 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:06:18 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/26 20:00:19 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 19:47:05 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "visualizer.h"
+#include "corewar.h"
 
-const int	g_colors[] = {0x00009b, 0x009b9b, 0x008000, 0x9b0000,
-	0x800080, 0x9b9b00, 0xa9a9a9, 0x323232, 0x6f6f6f};
+const int	g_colors[MAX_PLAYERS] = {RED, YELLOW, GREEN, BLUE};
 
-static void	draw_arena(t_vm *vm)
+void	init_visualizer(t_vm *vm)
 {
-	SDL_Rect	cell;
-	int			i;
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+		error2("SDL could not initialize. SDL error: ", SDL_GetError());
+	if (!(vm->window = SDL_CreateWindow("Corewar", SDL_WINDOWPOS_UNDEFINED,
+	SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN)))
+		error2("SDL could not create window. SDL error: ", SDL_GetError());
+	if (!(vm->renderer = SDL_CreateRenderer(vm->window, -1,
+	SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)))
+		error2("SDL could not create renderer. SDL error: ", SDL_GetError());
+	if (TTF_Init() < 0)
+		error2("SDL_ttf could not initialize. SDL error: ", TTF_GetError());
+	if (!(vm->font = TTF_OpenFont("resource/InputMono-Regular.ttf", 15)))
+		error(TTF_GetError());
+}
 
-	cell.w = (SCREEN_WIDTH - INFORMATION_SIZE) / ARENA_WIDTH - 1;
-	cell.h = SCREEN_HEIGHT / ARENA_HEIGHT - 1;
-	i = -1;
-	while (++i < MEM_SIZE)
+void	visualize(t_vm *vm)
+{
+	SDL_SetRenderDrawColor(vm->renderer, 0, 0, 0, 255);
+	SDL_RenderClear(vm->renderer);
+	draw_arena(vm);
+	draw_menu(vm);
+	SDL_RenderPresent(vm->renderer);
+}
+
+void	event_handler(t_vm *vm)
+{
+	SDL_Event	event;
+
+	while (SDL_PollEvent(&event))
 	{
-		cell.y = i / ARENA_WIDTH * (cell.h + 1) + 1;
-		cell.x = i % ARENA_WIDTH * (cell.w + 1) + 1;
-		SDL_SetRenderDrawColor(g_main_render,
-			(vm->arena[i].color & 0xff) + vm->arena[i].write_cycles,
-			(vm->arena[i].color >> 8 & 0xff) + vm->arena[i].write_cycles,
-			(vm->arena[i].color >> 16 & 0xff) + vm->arena[i].write_cycles, 255);
-		SDL_RenderFillRect(g_main_render, &cell);
-		SDL_SetRenderDrawColor(g_main_render, 255, 255, 255, 255);
-		if (vm->arena[i].cursors)
-			SDL_RenderDrawRect(g_main_render, &cell);
-		if (!vm->vis_pause && vm->arena[i].write_cycles)
-			vm->arena[i].write_cycles--;
+		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE)
+			vm->vis_pause = !vm->vis_pause;
+		else if (event.type == SDL_QUIT ||
+		(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE))
+			vm->vis_quit = 1;
 	}
 }
 
-static void	draw_winner(t_vm *vm, int y)
+void	finish_visualization(t_vm *vm)
 {
-	SDL_Color	color;
-	char		*full_line;
-
-	if (!(full_line =
-	ft_strjoin(vm->players[vm->winner - 1].header.prog_name, " won!")))
-		sys_error(NULL);
-	color.r = g_colors[vm->winner - 1] & 0xff;
-	color.g = g_colors[vm->winner - 1] >> 8 & 0xff;
-	color.b = g_colors[vm->winner - 1] >> 16 & 0xff;
-	draw_text(full_line, y, color);
-	free(full_line);
-}
-
-void		visualize(t_vm *vm)
-{
-	SDL_SetRenderDrawColor(g_main_render, 0, 0, 0, 255);
-	SDL_RenderClear(g_main_render);
-	draw_arena(vm);
-	if (vm->winner < 0)
-		draw_text(vm->vis_pause ? "***Pause***" : "***Running***", 20, WHITE);
-	else
-		draw_winner(vm, 20);
-	draw_data(vm->num_process, "Total processes: ", 40);
-	draw_data(vm->cycle, "Current cycle: ", 60);
-	draw_data(vm->cycles_to_die, "Cycles to die: ", 90);
-	draw_data(CYCLE_DELTA, "Cycle delta: ", 110);
-	draw_double_data(130, vm->live_calls, NBR_LIVE, "NBR_live: ");
-	draw_double_data(150, vm->checks, MAX_CHECKS, "MAX_checks: ");
-	draw_text("Live breakdown:", SCREEN_HEIGHT - 80, WHITE);
-	push_live_breakdown(vm, SCREEN_HEIGHT - 60);
-	draw_text("Arena distribution:", SCREEN_HEIGHT - 40, WHITE);
-	push_distribution(vm->arena, SCREEN_HEIGHT - 20);
-	push_players(vm, 180);
-	SDL_RenderPresent(g_main_render);
+	visualize(vm);
+	while (!vm->vis_quit && !vm->vis_pause)
+		event_handler(vm);
+	TTF_CloseFont(vm->font);
+	TTF_Quit();
+	SDL_DestroyRenderer(vm->renderer);
+	SDL_DestroyWindow(vm->window);
+	SDL_Quit();
 }

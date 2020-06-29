@@ -8,8 +8,7 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBFT_HEAD_DIR = $(LIBFT_DIR)/include
 LDFLAGS = -I $(HEAD_DIR) -I $(LIBFT_HEAD_DIR)
-SRC_FILES = main.c error.c input.c arena.c battle.c delete.c op1.c op2.c op3.c op4.c output.c players.c process.c table.c \
-	choose_colors.c menu.c visualizer.c visualizer_help.c
+SRC_FILES = main.c error.c input.c arena.c battle.c delete.c op1.c op2.c op3.c output.c players.c process.c table.c draw.c menu.c visualizer.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 

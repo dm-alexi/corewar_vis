@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/26 18:23:03 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 23:33:28 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,19 @@
 */
 
 #include <unistd.h>
+#include "libft.h"
 #include "corewar.h"
+
+void	aff(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
+{
+	(void)argtypes;
+	if (vm->visual)
+		ft_printf("Aff: %c\n", (char)t->reg[args[0] - 1]);
+}
 
 void	introduce(t_vm *vm)
 {
-	unsigned	i;
+	int	i;
 
 	ft_printf("Introducing contestants...\n");
 	i = 0;

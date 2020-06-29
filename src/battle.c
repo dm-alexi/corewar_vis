@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/26 20:08:09 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 23:28:11 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 ** All battle functionality: cycles, checks, processes' deaths.
 */
 
+#include "libft.h"
 #include "corewar.h"
-#include "visualizer.h"
 
 static void	kill_process(t_vm *vm, t_process *p)
 {
@@ -54,7 +54,7 @@ static void	kill_processes(t_vm *vm)
 
 static int	check(t_vm *vm)
 {
-	unsigned	i;
+	int	i;
 
 	kill_processes(vm);
 	if (++vm->checks >= MAX_CHECKS || vm->live_calls >= NBR_LIVE)

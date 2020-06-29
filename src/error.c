@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:18 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 16:12:06 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 23:37:22 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 ** All error and usage messages and invariant check.
 */
 
-#include <stdio.h>
 #include <unistd.h>
+#include "libft.h"
 #include "corewar.h"
 
 void	sys_error(const char *s)

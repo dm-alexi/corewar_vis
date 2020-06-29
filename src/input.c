@@ -6,13 +6,14 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/14 01:28:26 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 23:32:28 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "corewar.h"
 
-static int		is_digital(char *s)
+static int	is_digital(char *s)
 {
 	if (!s || !*s)
 		return (0);
@@ -21,7 +22,7 @@ static int		is_digital(char *s)
 	return (*s == '\0');
 }
 
-static int		is_flag(char *s)
+static int	is_flag(char *s)
 {
 	return (ft_strequ(s, "-d") || ft_strequ(s, "-dump") || ft_strequ(s, "-v") ||
 	ft_strequ(s, "-s"));
@@ -32,7 +33,7 @@ static int		is_flag(char *s)
 ** Return total number of champions.
 */
 
-static int		merge(char **files, char **unordered)
+static int	merge(char **files, char **unordered)
 {
 	int i;
 	int j;
@@ -60,7 +61,7 @@ static int		merge(char **files, char **unordered)
 ** Execute command line option (except -n). Return number of arguments to skip.
 */
 
-static int		exec_flag(t_vm *vm, int ac, char **av, int i)
+static int	exec_flag(t_vm *vm, int ac, char **av, int i)
 {
 	if (ft_strequ(av[i], "-d") || ft_strequ(av[i], "-dump"))
 	{
@@ -86,7 +87,7 @@ static int		exec_flag(t_vm *vm, int ac, char **av, int i)
 ** Handle all command line arguments and perform full input validation.
 */
 
-void			input(t_vm *vm, int ac, char **av)
+void		input(t_vm *vm, int ac, char **av)
 {
 	int		i;
 	int		ord;

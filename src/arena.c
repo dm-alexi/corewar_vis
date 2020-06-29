@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/26 13:30:34 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 23:27:59 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 ** NB: Arena is big-endian!
 */
 
+#include "libft.h"
 #include "corewar.h"
-#include "visualizer.h"
 
-static t_process	*new_process(t_process *next, unsigned num,
-					unsigned player_num, int pc)
+static t_process	*new_process(t_process *next, int num, int player_num,
+						int pc)
 {
 	t_process	*p;
 
@@ -39,14 +39,14 @@ static t_process	*new_process(t_process *next, unsigned num,
 
 void				init_arena(t_vm *vm)
 {
-	unsigned	i;
+	int			i;
 	unsigned	j;
 	int			step;
 
 	step = MEM_SIZE / vm->num_players;
 	i = 0;
 	while (i < MEM_SIZE)
-		vm->arena[i++].color = 0x6f6f6f;
+		vm->arena[i++].color = GREY;
 	i = 0;
 	while (i < vm->num_players)
 	{
@@ -72,8 +72,8 @@ void				init_arena(t_vm *vm)
 
 int					read_dir(int start, t_battlefield *arena)
 {
-	char		s[DIR_SIZE];
-	int			i;
+	char	s[DIR_SIZE];
+	int		i;
 
 	start = cut(start);
 	i = -1;
@@ -88,8 +88,8 @@ int					read_dir(int start, t_battlefield *arena)
 
 int					read_ind(int start, t_battlefield *arena)
 {
-	char		s[IND_SIZE];
-	int			i;
+	char	s[IND_SIZE];
+	int		i;
 
 	start = cut(start);
 	i = -1;
@@ -105,8 +105,8 @@ int					read_ind(int start, t_battlefield *arena)
 void				write_bytes(int n, int start, t_battlefield *arena,
 						int color)
 {
-	t_byte		*s;
-	int			i;
+	t_byte	*s;
+	int		i;
 
 	start = cut(start);
 	s = (t_byte*)&n;
