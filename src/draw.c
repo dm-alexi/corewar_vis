@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:04:28 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/29 19:46:47 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/16 20:22:18 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	draw_text(t_vm *vm, char *text, int y, SDL_Color color)
 	SDL_Texture	*text_texture;
 	SDL_Rect	coor;
 
+	if (!text || !*text)
+		return ;
 	text_texture = NULL;
 	coor.x = SCREEN_WIDTH - MENU_WIDTH + OFFSET;
 	coor.y = y;
