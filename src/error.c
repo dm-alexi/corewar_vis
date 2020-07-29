@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:18 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/29 23:37:22 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/01 01:07:20 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,7 @@ void	check_invariants(void)
 	CYCLE_DELTA <= 0 || T_REG == T_DIR || T_REG == T_IND || T_IND == T_DIR ||
 	PROG_NAME_LENGTH < 0 || COMMENT_LENGTH < 0)
 		error("op.h constants are invalid.");
+	if (ARENA_WIDTH * ARENA_HEIGHT != MEM_SIZE || MENU_WIDTH > SCREEN_WIDTH / 2
+	|| OFFSET > MENU_WIDTH / 2 || BAR_WIDTH > MENU_WIDTH - OFFSET)
+		error("visualizer constants are invalid.");
 }

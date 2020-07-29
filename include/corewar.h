@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/29 23:27:29 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/01 13:27:02 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 # define ARENA_HEIGHT	64
 # define BAR_WIDTH		300
 # define BAR_HEIGHT		15
+# define CYCLES_FADE	100
 
 # define GREY			0x6f6f6f
 # define RED			0x00009b

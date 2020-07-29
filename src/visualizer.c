@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:06:18 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/29 19:47:05 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/01 12:16:57 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,11 @@ void	event_handler(t_vm *vm)
 
 void	finish_visualization(t_vm *vm)
 {
-	visualize(vm);
 	while (!vm->vis_quit && !vm->vis_pause)
+	{
+		visualize(vm);
 		event_handler(vm);
+	}
 	TTF_CloseFont(vm->font);
 	TTF_Quit();
 	SDL_DestroyRenderer(vm->renderer);

@@ -6,14 +6,14 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:05:44 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/29 23:39:00 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/01 12:43:53 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "corewar.h"
 
-static void		draw_data(t_vm *vm, int data, char *info_text, int y)
+static void	draw_data(t_vm *vm, int data, char *info_text, int y)
 {
 	static const SDL_Color	white = (SDL_Color){255, 255, 255, 255};
 	char					*number;
@@ -28,7 +28,7 @@ static void		draw_data(t_vm *vm, int data, char *info_text, int y)
 	free(full_line);
 }
 
-static char		*join_data(char *text, int data_1, int data_2)
+static char	*join_data(char *text, int data_1, int data_2)
 {
 	char	*tmp1;
 	char	*tmp2;
@@ -50,7 +50,7 @@ static char		*join_data(char *text, int data_1, int data_2)
 	return (full_line);
 }
 
-static void		draw_players(t_vm *vm, int pos)
+static void	draw_players(t_vm *vm, int pos)
 {
 	int			i;
 	SDL_Color	color;
@@ -59,10 +59,8 @@ static void		draw_players(t_vm *vm, int pos)
 	while (i < vm->num_players)
 	{
 		draw_data(vm, i + 1, "Player # ", pos);
-		color.r = g_colors[i] & 0xff;
-		color.g = g_colors[i] >> 8 & 0xff;
-		color.b = g_colors[i] >> 16 & 0xff;
-		color.a = 255;
+		color = (SDL_Color){.a = 255, .r = g_colors[i] & 0xff,
+			.g = g_colors[i] >> 8 & 0xff, .b = g_colors[i] >> 16 & 0xff};
 		draw_text(vm, vm->players[i].header.prog_name, pos + 20, color);
 		draw_data(vm, vm->players[i].last_alive, "Last alive: ", pos + 40);
 		draw_data(vm, vm->players[i].lives_in_current_period,
@@ -74,7 +72,7 @@ static void		draw_players(t_vm *vm, int pos)
 	}
 }
 
-static void		draw_winner(t_vm *vm, int y)
+static void	draw_winner(t_vm *vm, int y)
 {
 	SDL_Color	color;
 	char		*full_line;
@@ -82,15 +80,14 @@ static void		draw_winner(t_vm *vm, int y)
 	if (!(full_line =
 	ft_strjoin(vm->players[vm->winner - 1].header.prog_name, " won!")))
 		sys_error(NULL);
-	color.r = g_colors[vm->winner - 1] & 0xff;
-	color.g = g_colors[vm->winner - 1] >> 8 & 0xff;
-	color.b = g_colors[vm->winner - 1] >> 16 & 0xff;
-	color.a = 255;
+	color = (SDL_Color){.a = 255, .r = g_colors[vm->winner - 1] & 0xff,
+		.g = g_colors[vm->winner - 1] >> 8 & 0xff,
+		.b = g_colors[vm->winner - 1] >> 16 & 0xff};
 	draw_text(vm, full_line, y, color);
 	free(full_line);
 }
 
-void			draw_menu(t_vm *vm)
+void		draw_menu(t_vm *vm)
 {
 	static const SDL_Color	white = (SDL_Color){255, 255, 255, 255};
 	char					*line;

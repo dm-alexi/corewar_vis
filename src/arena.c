@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/29 23:27:59 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/01 13:26:37 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,6 @@ void				write_bytes(int n, int start, t_battlefield *arena,
 	{
 		arena[(start + i) % MEM_SIZE].code = s[REG_SIZE - 1 - i];
 		arena[(start + i) % MEM_SIZE].color = color;
-		arena[(start + i) % MEM_SIZE].write_cycles = 100;
+		arena[(start + i) % MEM_SIZE].write_cycles = CYCLES_FADE;
 	}
 }
